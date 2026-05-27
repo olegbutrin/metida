@@ -2,8 +2,8 @@ name: Deploy JupyterLite
 
 on:
   push:
-    branches: ["main"] # Запуск при пуше в ветку 'main'
-  workflow_dispatch: # Разрешает ручной запуск из интерфейса GitHub
+    branches: ["main"]
+  workflow_dispatch:
 
 jobs:
   build-and-deploy:
@@ -16,7 +16,7 @@ jobs:
           python-version: "3.11"
       - name: Install dependencies
         run: |
-          pip install -r requirements.txt
+          pip install jupyterlite-core jupyterlite-pyodide-kernel
       - name: Build JupyterLite site
         run: |
           jupyter lite build --contents content --output-dir dist
@@ -25,5 +25,4 @@ jobs:
         with:
           path: ./dist
       - name: Deploy to GitHub Pages
-        id: deployment
         uses: actions/deploy-pages@v4
