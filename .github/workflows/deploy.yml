@@ -21,7 +21,7 @@ jobs:
           python-version: "3.11"
       - name: Install dependencies
         run: |
-          pip install jupyterlite-core jupyterlite-pyodide-kernel jupyter-server
+          pip install -r requirements.txt || pip install jupyterlab jupyterlab_server jupyterlite-core jupyterlite-pyodide-kernel ipywidgets
       - name: Build JupyterLite site
         run: |
           jupyter lite build --contents content --output-dir dist
